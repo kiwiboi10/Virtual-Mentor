@@ -17,9 +17,9 @@ ROLE_MODELS = {
     "Jordan Peterson": "I'm Jordan Peterson, a clinical psychologist and professor. Let's delve into personal development, responsibility, morality, and critical thinking to enhance our understanding of life.",
 }
 
-openai.api_key = "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"
-TELEGRAM_API_TOKEN = "6457424200:AAF1UkcNYgmmTaMsuD2a0AcuRO4FfAUGDaI"
-ELEVENLABS_API_KEY = "b7df1cda2c864365e6706ed09938bf62"
+openai.api_key = "<INSERT OPENAI API KEY>"
+TELEGRAM_API_TOKEN = "<INSERT TELEGRAM BOT KET>"
+ELEVENLABS_API_KEY = "<INSERT ELEVENLABS API KEY>"
 ELEVENLABS_VOICE_STABILITY = 0.35
 ELEVENLABS_VOICE_SIMILARITY = 0.85
 
