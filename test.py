@@ -26,11 +26,11 @@ ELEVENLABS_VOICE_SIMILARITY = 0.85
 ELEVENLABS_ALL_VOICES = []
 
 def fetch_elevenlabs_voices():
-    url = "https://api.elevenlabs.io/v1/voices"  # Replace with the correct endpoint
+    url = "https://api.elevenlabs.io/v1/voices"  
     headers = {"xi-api-key": ELEVENLABS_API_KEY}
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        return response.json()["voices"]  # Adjust depending on the API response structure
+        return response.json()["voices"]  
     else:
         logging.error(f"Failed to fetch voices from ElevenLabs: {response.text}")
         return []
@@ -44,14 +44,12 @@ def generate_audio(text: str, role_model_name: str, output_path: str = "") -> st
     # Try to find a voice that matches the role model name
     voice_id = next((voice["voice_id"] for voice in voices if voice["name"] == role_model_name), None)
 
-    # If no matching voice is found, use any available voice
     if voice_id is None:
         if voices:  # Check if the list is not empty
             voice_id = voices[0]["voice_id"]
         else:
             logging.error("No voices available!")
-            return  # Handle this error appropriately for your application
-
+            return  
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
     headers = {
         "xi-api-key": ELEVENLABS_API_KEY,
@@ -137,8 +135,7 @@ def voice_message(update, context):
     update.message.reply_text(
         text=f"*[You]:* _{transcript}_", parse_mode=telegram.ParseMode.MARKDOWN)
 
-    role_model_name = context.user_data["selected_role_model"] # Assuming you've stored the selected role model in context.user_data
-
+    role_model_name = context.user_data["selected_role_model"] 
     if "messages" not in context.user_data:
         system_prompt = f"Embodying the wisdom and virtues of {role_model_name}, please respond to the user's interaction. If relevant, consider the previous exchanges as well. Whether they seek advice, share an accomplishment, or pose a question, consider how {role_model_name} might respond."
         context.user_data["messages"] = [{"role": "system", "content": system_prompt}]
